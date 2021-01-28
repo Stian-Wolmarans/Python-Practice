@@ -1,2 +1,1 @@
-# Binder
-Binder for python practice coding
+Python practice coding
