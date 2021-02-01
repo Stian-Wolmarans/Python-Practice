@@ -20,4 +20,15 @@ def bubblesort(array):
     print("Array bubble sort: ")
     print(array)
 
+def bubblesortop(array):
+    n = len(array)
+    for i in range(n-1):
+        print("Outer Loop")
+        print(array)
+        for j in range(0,n-i-1):
+            print(array)
+            print("Inner Loop")
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1],array[j]
+    print("Sorted array is:", array)
 
