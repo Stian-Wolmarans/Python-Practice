@@ -11,7 +11,7 @@ while(repeat == 1):
 
     #print(number)
 
-    usernum = int(input("Guess a number from 1-9: "))
+    usernum = int(input("Guess a number from 1-5: "))
 
     #print(usernum)
 
