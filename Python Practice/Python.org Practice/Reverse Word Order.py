@@ -3,7 +3,8 @@ import numpy as np
 def convert(sentance): 
     return (sentance[0].split())
 
-def wordswap(words):
+#manual way
+"""def wordswap(words):
     lst = [words]
     array = (convert(lst))
     print(array)
@@ -11,9 +12,17 @@ def wordswap(words):
     newarray = []
     for i in range(0,n):
         newarray.append(array[n-1-i])
-    print(newarray)    
+    print(newarray) """   
+
+#simple function way
+def wordswap2(words):
+    lst = [words]
+    array = (convert(lst))
+    print(array)
+    array.reverse()
+    print(array)
     
-wordswap("This is my new longer sentance")
+wordswap2("This is my new longer sentance")
 
 
 
