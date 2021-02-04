@@ -22,7 +22,7 @@ def wordswap2(words):
     array.reverse()
     print(array)
     
-wordswap2("This is my new longer sentance")
+wordswap2("The duck may swim on the lake but my daddy owns the lake")
 
 
 
