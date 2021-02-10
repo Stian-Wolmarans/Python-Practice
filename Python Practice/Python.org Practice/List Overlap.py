@@ -15,6 +15,7 @@ for i in array1:
 print("The matching values in these lists are: ")
 array3 = list(dict.fromkeys(array3))
 
+#bubble sort
 n = len(array3)
 for x in range(n-1):
     for j in range(0,n-x-1):
