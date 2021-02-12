@@ -61,35 +61,41 @@ def Ex2():
 
 def Ex3():
     #load data
-    #digits = load_digits
+    digits = load_digits()
 
     #extract three parts of the data
-    data = load_digits.data
+    data = digits.data
     images = digits.images
-    target = digits.target
+    targets = digits.target
 
-    #extract inputs
-    inputs = data.values[:,:-1].astype(float)
+    
+    print(data)
+    print("Gap")
+    print(images)
+    print("Gap")
+    print(targets)
+    
 
-    #reduce dimensions
+    #reduce dimensions    
+    inputs = data
     pca = PCA(n_components=2)
-    compressed = pca.fit_transform(inputs)
+    compressed = pca.fit_transform(inputs)    
 
     #train classifier
     classifier = KNeighborsClassifier(n_neighbors=10)
     classifier.fit(inputs, targets)
     classifiedData = classifier.predict(inputs)
 
-    #plot results
-    plt.figure()
-    plt.scatter(compressed[:,0], compressed[:,1], c=classifiedData)
-    plt.title("PCA projection - classified")
-    plt.savefig("iris_pca_classified.png", bbox_inches="tight")
+    #plot results using Maptplotlib imshow
+    #add target value as figure title
+    plt.imshow(inputs, cmap = 'Blues', 
+                extent = (-2,5,-2,5,), 
+                filternorm = True, 
+                resample = True,
+                vmin = 1,
+                vmax = 1)
     plt.show()
-
-
-
-
+       
 
 #Ex1()
 #Ex2()
