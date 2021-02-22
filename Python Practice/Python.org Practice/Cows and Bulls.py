@@ -50,10 +50,9 @@ while(again == 1):
     Bull += n
     print("You scored", smallBull, "Bulls!")
 
-    #prompt to play again
-    
-    if toguess == guess1:
-        again = 0
+    #prompt to play again    
+    #if toguess == guess1:
+     #   again = 0
 
 #show final score
 print("Your final score is", Bull, "Bulls and", Cow, "Cows")

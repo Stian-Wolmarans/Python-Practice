@@ -4,7 +4,10 @@ from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import numpy as np
-from sklearn.datasets import load_digits
+#from sklearn.datasets import load_digits
+from sklearn.neural_network import MLPRegressor
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import confusion_matrix
 
 def Ex1():
 
@@ -88,16 +91,39 @@ def Ex3():
 
     #plot results using Maptplotlib imshow
     #add target value as figure title
-    plt.imshow(inputs, cmap = 'Blues', 
-                extent = (-2,5,-2,5,), 
-                filternorm = True, 
-                resample = True,
-                vmin = 1,
-                vmax = 1)
+    plt.imshow(inputs)
     plt.show()
        
+def Ex4():
+    #load data
+    data = pd.read_csv("C:\\git\\Python-Practice\\Python Practice\\Uni\\Iris\\Iris.csv")
 
+    #extact inputs
+    inputs = data.values[:,:-1].astype(float)
+
+    #extract targets
+    cls = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+    targets = [cls.index(c) for c in data.values[:,-1].astype(str)]
+    targets = np.array(targets)    
+    
+    #train neural network
+    regressor = MLPRegressor()
+    regressor.fit(inputs, targets)
+    outputs = regressor.predict(inputs)
+
+    #show error
+    print(mean_absolute_error(targets, outputs))
+
+    #compare result to target
+    data = {'y_actual': [targets], 'y_predicted': [outputs]}
+    df = pd.DataFrame(data, columns = ['y_actual', 'y_predicted'])
+    print(df)
+    #confusion_matrix = pd.crosstab(df['y_actual'], df['y_predicted'], rownames=['Actual'], colnames=['Predicted'])
+    #print(confusion_matrix)
+
+    
 #Ex1()
 #Ex2()
-Ex3()
+#Ex3()
+Ex4()
 
