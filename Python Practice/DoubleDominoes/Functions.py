@@ -1,5 +1,6 @@
 #import libraries
 import numpy as np
+from sklearn.utils import shuffle
 import Players
 
 def build_pile():
@@ -26,6 +27,19 @@ def create_players(num_players):
     
     return thisarray
 
-        
-            
+def reshape(array):
+    array = shuffle(array, random_state = 0)
+    return array
 
+def pop_n_drop(array1, array2):
+    array2[-1] = array1[0]
+    array1 = np.delete(array1, 0)
+    print(array1)
+    print(array2)
+
+    return array2
+
+this1 = np.array([[1,2],[1,5],[9,8]])
+this2 = np.array([[4,5],[5,7]])
+
+pop_n_drop(this1,this2)
