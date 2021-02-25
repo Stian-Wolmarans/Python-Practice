@@ -19,6 +19,8 @@ def build_pile():
 
 def create_players(num_players):
 
+
+
     thisarray = []
 
     #create n variable number of players
@@ -31,15 +33,12 @@ def reshape(array):
     array = shuffle(array, random_state = 0)
     return array
 
-def pop_n_drop(array1, array2):
-    array2[-1] = array1[0]
-    array1 = np.delete(array1, 0)
-    print(array1)
-    print(array2)
+def split_n_copy(player, pile, player_num):
 
-    return array2
+    pile = np.array_split(pile, 8, axis = 0)
+    temp = pile[player_num-1]
+    
+    np.copyto(player, temp)
 
-this1 = np.array([[1,2],[1,5],[9,8]])
-this2 = np.array([[4,5],[5,7]])
+    return player
 
-pop_n_drop(this1,this2)

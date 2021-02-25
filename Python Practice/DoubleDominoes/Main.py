@@ -1,4 +1,5 @@
 import Functions as F
+import numpy as np
 
 #build pile of tiles to draw from
 pile = F.build_pile()
@@ -12,7 +13,16 @@ n = int(input("How many players? "))
 #create list of player objects
 mylist = F.create_players(n)
 
-#deal out 11 tiles to each player
+#remove three tiles
+i = np.random.randint(0,7)
+pile = np.delete(pile, [[i,(i+2)],[i,(i+3)]], axis = 0)
+
+#deal 11 tiles to each player
+for i in range(n):
+    mylist[i].set_array(F.split_n_copy(mylist[i].get_array(), pile, i))
+
+#create train objects, number of players + sauce train
+
 
 
 

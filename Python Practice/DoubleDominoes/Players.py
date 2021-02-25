@@ -4,8 +4,15 @@ class Player:
     #constructor
     def __init__(self, x, name):
         self.name = name
-        self.x = np.array([[0,0]])
+        self.x = np.array([[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]])
 
+    #getter
+    def get_array(self):
+        return self.x
+    
+    #setter
+    def set_array(self, y):
+        self.x = y
     
     
      
