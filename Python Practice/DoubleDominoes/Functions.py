@@ -2,6 +2,7 @@
 import numpy as np
 from sklearn.utils import shuffle
 import Players
+import random
 
 def build_pile():
 
@@ -19,8 +20,6 @@ def build_pile():
 
 def create_players(num_players):
 
-
-
     thisarray = []
 
     #create n variable number of players
@@ -34,11 +33,10 @@ def reshape(array):
     return array
 
 def split_n_copy(player, pile, player_num):
-
+    
     pile = np.array_split(pile, 8, axis = 0)
     temp = pile[player_num-1]
     
     np.copyto(player, temp)
-
+    
     return player
-

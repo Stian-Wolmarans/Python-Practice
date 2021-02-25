@@ -13,15 +13,21 @@ n = int(input("How many players? "))
 #create list of player objects
 mylist = F.create_players(n)
 
-#remove three tiles
-i = np.random.randint(0,7)
-pile = np.delete(pile, [[i,(i+2)],[i,(i+3)]], axis = 0)
-
 #deal 11 tiles to each player
-for i in range(n):
-    mylist[i].set_array(F.split_n_copy(mylist[i].get_array(), pile, i))
+for x in range(n):
+    mylist[x].set_array(F.split_n_copy(mylist[x].get_array(), pile, x))
+
+#delete dealt tiles form pile
+
+#replace randomly removed tiles
 
 #create train objects, number of players + sauce train
+
+#compare and play functions
+
+#check left over tiles are loop
+
+print(mylist[0].x)
 
 
 
