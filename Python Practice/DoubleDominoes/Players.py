@@ -14,6 +14,8 @@ class Player:
     def set_array(self, y):
         self.x = y
     
+    def append_array(self, y):
+        np.append(self.x, y)
     
      
 
