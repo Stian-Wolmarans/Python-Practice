@@ -1,2 +1,2 @@
-Python practice problems
+Python practice
 
