@@ -30,16 +30,21 @@ def create_players(num_players):
     return thislist
 
 def reshape(array):
-    array = shuffle(array, random_state = 0)
+    array = shuffle(array, random_state = None)
     return array
 
 def deal_tiles(players, pile, num_players):
 
     #remove three random tiles
-    idx = np.random.randint(91, size = 3)
+    idx = np.random.randint(0, high = 89, size = 2)
     tempstore = pile[tuple([idx])]
+    pile = np.delete(pile, [[90]], axis = 0)
     pile = np.delete(pile, [[idx]], axis = 0)
-
+   
+    #shuffle pile
+    for i in range(5):
+        pile = reshape(pile)
+   
     #split
     pile = np.array_split(pile, 8, axis = 0)
 
@@ -81,3 +86,12 @@ def create_trains(num_players):
         thislist.append(Trains.Train(i, "array", False))
     
     return thislist
+
+def compare(trainlist, playerlist, player_num):
+    trainlist[player_num].x = np.vstack(trainlist[player_num].x)
+    print(trainlist[player_num].x)
+
+    playerlist[player_num].x = np.vstack(playerlist[player_num].x)
+    print(playerlist[player_num].x)
+
+

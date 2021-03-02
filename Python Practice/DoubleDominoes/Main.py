@@ -4,9 +4,6 @@ import numpy as np
 #build pile of tiles to draw from
 pile = F.build_pile()
 
-#shuffle pile
-pile = F.reshape(pile)
-
 #get input for number of players
 n = int(input("How many players? "))
 
@@ -26,7 +23,10 @@ trainlist = F.create_trains(n)
 trainlist[-1].set_status(True)
 
 #compare and play functions
+F.compare(trainlist, playerlist, 0)
+
 #if player cannot play open train
+
 #close train if player can play on own train
 
 #check left over tiles are loop
