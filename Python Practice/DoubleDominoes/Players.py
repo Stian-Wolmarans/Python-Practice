@@ -17,6 +17,10 @@ class Player:
     #append
     def append_array(self, y):
         np.append(self.x, y)
+
+    #delete value
+    def delete_value(self, y):
+        np.delete(self.x, y)
     
      
 
