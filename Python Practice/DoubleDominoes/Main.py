@@ -23,19 +23,11 @@ trainlist = F.create_trains(n)
 trainlist[-1].set_status(True)
 
 #compare and play functions
-F.compare(trainlist, playerlist, 0)
-
-#if player cannot play open train
-
-#close train if player can play on own train
-
-#check left over tiles are loop
-
-
-
-
-
-
-
-
-
+for i in range(n):
+    if F.compare_n_play(trainlist, playerlist, i)[0] == 0:
+        print("Try playing on another train...")
+        #function here for player to check open trains
+        #function here for picking up a tile if they cannot play
+    else:
+        playerlist[i].set_array(F.compare_n_play(trainlist,playerlist,i)[2])
+    

@@ -3,7 +3,7 @@ import numpy as np
 class Train:
     def __init__(self, name, x, status):
         self.name = name
-        self.x = np.array([[12,12]])
+        self.x = np.array([12])
         self.status = False
     
     #getters

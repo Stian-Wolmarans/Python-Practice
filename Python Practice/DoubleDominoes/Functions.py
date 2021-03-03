@@ -31,12 +31,15 @@ def create_players(num_players):
 
 def reshape(array):
     array = shuffle(array, random_state = None)
+    array = shuffle(array, random_state = 0)
+    array = shuffle(array, random_state = 1)
+    array = shuffle(array, random_state = 2)
     return array
 
 def deal_tiles(players, pile, num_players):
 
     #remove three random tiles
-    idx = np.random.randint(0, high = 89, size = 2)
+    idx = np.random.randint(1, high = 89, size = 2)
     tempstore = pile[tuple([idx])]
     pile = np.delete(pile, [[90]], axis = 0)
     pile = np.delete(pile, [[idx]], axis = 0)
@@ -61,7 +64,7 @@ def deal_tiles(players, pile, num_players):
         mask[[i]] = False
         newpile = pile[mask]
         
-    #reinsert three removed tiles
+    #reinsert two removed removed tiles
     newpile = np.append(newpile, tempstore, axis = 0)
 
     return players, newpile
@@ -87,11 +90,42 @@ def create_trains(num_players):
     
     return thislist
 
-def compare(trainlist, playerlist, player_num):
-    trainlist[player_num].x = np.vstack(trainlist[player_num].x)
-    print(trainlist[player_num].x)
+def compare_n_play(trainlist, playerlist, player_num):
+    
+    #flatten arrays
+    array1 = trainlist[player_num].x
+    array2 = np.hstack(playerlist[player_num].x)
 
-    playerlist[player_num].x = np.vstack(playerlist[player_num].x)
-    print(playerlist[player_num].x)
+    #compare, play tile on playertrain, delete tile from players hand, return 0 if can't play
+    z = 0
+    if len(array2) == 0:
+        z = 1    
+    for q in range(len(array2)):
+        if z == 0:
+            if array1[0] == array2[q]:
+                w = q
+                z = 1    
+                if w % 2 == 1:
+                    np.copyto(array1, array2[w-1], casting = 'same_kind')
+                    array2 = np.delete(array2, w-1)
+                    array2 = np.delete(array2, w-1)
+                if w % 2 == 0:
+                    np.copyto(array1, array2[w+1], casting = 'same_kind')
+                    array2 = np.delete(array2, w)
+                    array2 = np.delete(array2, w)
+
+    #unflatten array and return to 2d
+    x = (len(array2)/2)
+    array2 = np.array_split(array2, x, axis = 0)
+    array2 = np.vstack(array2)
+
+
+    return z, array1, array2
+                 
+def find_open_train():
+
+def play_open():
+
+            
 
 
