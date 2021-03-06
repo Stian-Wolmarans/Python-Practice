@@ -27,7 +27,7 @@ pass_tally = 0
 count_round = 0
 
 #play rounds
-while (len(pile) != 0 and pass_tally < num_players+1):
+while (len(pile) != 0 or pass_tally < num_players+1):
     count_round += 1
 
     print("/////////////////////ROUND START", count_round, "/////////////////////////////////")
@@ -51,6 +51,9 @@ while (len(pile) != 0 and pass_tally < num_players+1):
             #if player cannot play
             if F.play_other_train(openlist, trainlist, playerlist, i) == 0:
                 print("Pick up tile from pile...")
+
+                if len(pile) == 0:
+                    break
 
                 #pick up from pile
                 pile = F.pick_up_tile(playerlist, pile, i)[0]
