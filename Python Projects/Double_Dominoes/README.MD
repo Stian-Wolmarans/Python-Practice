@@ -3,5 +3,5 @@ Program which plays double-dominoes, currently it plays until no player can move
 Improvement I could make:
   - Use slicing to manipulate arrays as apposed to array splitting, not sure which one is better optimized...
   - Comments
-  - General structure
+  - Fix logical errors, i.e. some bugs that come up in certain games...
   - Make algorithm behave strategically
