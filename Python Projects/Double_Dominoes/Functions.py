@@ -5,82 +5,49 @@ import Players
 import Trains
 import random
 
-def build_pile():
-
-    #create array
+def deal_tiles(num_players):
+        
+    #create pile with dimension (1,2)
     pile = np.array([[12,12]])
 
-    #fill array
+    #fill pile, new dimension = (91, 2)
     for x in range(13):
         for i in range(x, 13):
             pile = np.append(pile, [[x,i]], axis = 0)
 
-    #remove duplicate 00  
+    #remove duplicates  
     pile = np.unique(pile, axis = 0)
-    return pile
 
-def create_players(num_players):
+    #remove tile 12_12, this tile will be used as starting block
+    pile = np.delete(pile, [[90]], axis = 0)
 
+    #shuffle pile
+    pile = shuffle(pile, random_state = None)
+    pile = shuffle(pile, random_state = 0)
+    pile = shuffle(pile, random_state = 1)
+    pile = shuffle(pile, random_state = 2)
+
+    #create player list
     thislist = []
 
-    #create n variable number of players
+    #create players and append to player list
     for i in range(num_players):
-        thislist.append(Players.Player("array", i))
-    
-    return thislist
+        thislist.append(Players.Player("pile", i))
 
-def reshape(array):
-    array = shuffle(array, random_state = None)
-    array = shuffle(array, random_state = 0)
-    array = shuffle(array, random_state = 1)
-    array = shuffle(array, random_state = 2)
-    return array
-
-def deal_tiles(players, pile, num_players):
-
-    #remove three random tiles
-    idx = np.random.randint(1, high = 88, size = 2)
-    tempstore = pile[tuple([idx])]
-    pile = np.delete(pile, [[90]], axis = 0)
-    pile = np.delete(pile, [[idx]], axis = 0)
-   
-    #shuffle pile
-    for i in range(5):
-        pile = reshape(pile)
-   
-    #split
-    pile = np.array_split(pile, 8, axis = 0)
-
-    #copy to player arrays
+    #loop for each player
     for i in range(num_players):
-        temp = pile[i]  
-        if len(temp) == 12:
-            np.delete(temp, 1, axis = 0)
-        np.copyto(players[i].x, temp) 
-    
-    #create new pile(right side of split)
-    pile = np.vstack(pile)  
-    n = (num_players*11)
-    mask = np.ones(len(pile), dtype = bool)
-    for i in range(n):
-        mask[[i]] = False
-        newpile = pile[mask]
-        
-    #reinsert two removed removed tiles
-    newpile = np.append(newpile, tempstore, axis = 0)
 
-    return players, newpile
+        #create slice of 11 tiles
+        pile_slice = pile[0:11]
 
-def confirm_dealtiles(pile, mylist, num_players):
+        #copy to player    
+        np.copyto(thislist[i].x, pile_slice)
 
-    s = 1
-    for y in range(num_players):
-        if mylist[y].x.any == pile.any:
-            s = 0
-    if s == 1:
-        print("Tiles dealt: Success")
-    else:
-        print("Tiles not dealt correctly")
+        #delete slice from pile
+        idx = [0,1,2,3,4,5,6,7,8,9,10]
+        pile = np.delete(pile, [[idx]], axis = 0)
+
+    return pile, thislist
 
 def create_trains(num_players):
 
@@ -94,6 +61,7 @@ def create_trains(num_players):
                  
 def can_i_play(playerlist, trainlist, player_num):
     
+    #if hand empty don't play
     if len(playerlist[player_num].x) == 0:
         z = 0
         return z
@@ -199,21 +167,15 @@ def pick_up_tile(playerlist, pile, player_num):
 
     stop = 0
 
-    print("Picking up tile...")
-    print("Length pile: ", len(pile))
-
     #append from pile to player
     playerlist[player_num].x = np.append(playerlist[player_num].x, pile[0])
-    print("After pick up: ", playerlist[player_num].x)
-    print("Length player array: ", len(playerlist[player_num].x))
 
     #delete from pile
-    print("Length Pile: ", len(pile))
     mask = np.ones(len(pile), dtype = bool)
     mask[[0]] = False
     pile = pile[mask]
-    print("Length Pile: ", len(pile))
 
+    
     #unflatten array and return to 2d
     x = (len(playerlist[player_num].x)/2)
     player = np.array_split(playerlist[player_num].x, x, axis = 0)
@@ -221,7 +183,7 @@ def pick_up_tile(playerlist, pile, player_num):
 
     #replace player array
     playerlist[player_num].set_array(player)
-
+    
     if len(pile) == 0:
         stop = 1
         print("NO MORE TILES")
