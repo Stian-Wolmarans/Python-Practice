@@ -3,21 +3,9 @@ import numpy as np
 
 def Play_Game(players):
 
-
-    #build pile of tiles to draw from
-    pile = F.build_pile()
-
-    #get input for number of players
-    num_players = players
-
-    #create list of player objects
-    playerlist = F.create_players(num_players)
-
-    #deal 11 tiles to each player
-    playerlist, pile = F.deal_tiles(playerlist, pile, num_players)
-
-    #check to see if tiles are dealt correctly, none matching the pile
-    F.confirm_dealtiles(pile, playerlist, num_players)
+    #deal tiles, create players, create pile
+    num_players  = players
+    pile, playerlist = F.deal_tiles(num_players)
 
     #create train objects, number of players + sauce train
     trainlist = F.create_trains(num_players)
