@@ -3,8 +3,10 @@ Program which plays double-dominoes, currently it plays until no player can move
 **Update 1:**
 Packaged whole game into one method in order to play batches of games. Currently game can play between 10 - 100 games before an error occurs. Most bugs came up when player hands or pile were empty so I added some conditional statements to exit functions, thought the condition in the main methods would do the trick but apperently not. Still encountering an error when dealing tiles. In some games there seems to be an un-equal split in dividing the tiles up into sets of 11. Will create fork to attempt to rewrite the function. Will try using slicing instead of array split. Had not heard of array slicing prior to this. Currently train tiles are not stored in train but only the last placed tile is remembered,I did this because that was all that was needed to compare which trains are playable. For a visual representation it would be cool to see the whole train. 
 
+**Update 2:**
+Merged deal_tiles, create_pile, and create_players into one function which uses simpler code, for instance slicing instead of splitting. Tried to reduce iterations where possible. Managed to let a 1000+ games run without any errors. Every game is roughly 0.2-0.4 seconds. Would be coool to reduce this time. 
+
 **Improvements:**
-  - Use slicing to manipulate arrays as apposed to array splitting, rewrite tile dealing
   - "Sauce Train" varaible placement   
   - Improve Comments
   - Make algorithm behave strategically
