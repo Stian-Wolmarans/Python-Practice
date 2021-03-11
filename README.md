@@ -1,2 +1,2 @@
-Python projects, some practice problems and small programs
+Python projects, some practice problems and programs
 
