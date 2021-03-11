@@ -1,78 +1,13 @@
-import Functions as F
+import Method as M
 import numpy as np
+import random
 
-#build pile of tiles to draw from
-pile = F.build_pile()
+game_count = 0
 
-#get input for number of players
-num_players = int(input("How many players? "))
+num_players = np.random.randint(1, 8, dtype = int)
 
-#create list of player objects
-playerlist = F.create_players(num_players)
+for i in range(100):
+    M.Play_Game(num_players)
+    game_count += 1
 
-#deal 11 tiles to each player
-playerlist, pile = F.deal_tiles(playerlist, pile, num_players)
-
-#check to see if tiles are dealt correctly, none matching the pile
-F.confirm_dealtiles(pile, playerlist, num_players)
-
-#create train objects, number of players + sauce train
-trainlist = F.create_trains(num_players)
-
-#open sauce train
-trainlist[-1].set_status(True)
-
-#variable to stop game if no one can play
-pass_tally = 0
-count_round = 0
-
-#play rounds
-while (len(pile) != 0 or pass_tally < num_players+1):
-    count_round += 1
-
-    print("/////////////////////ROUND START", count_round, "/////////////////////////////////")
-
-    for i in range(num_players):
-        print("//////////////////PLAYER", i, "///////////////////////////////////")
-        if F.can_i_play(playerlist, trainlist, i) == 1:
-
-            #play on own train
-            F.play_own_train(playerlist, trainlist, i)
-            pass_tally = 0
-
-        #if player cannot play on own train
-        elif F.can_i_play(playerlist, trainlist, i) == 0:
-            print("Can't play")
-
-            #find open trains
-            openlist = F.find_open_train(trainlist, num_players)
-            print("Open list: ",openlist)
-
-            #if player cannot play
-            if F.play_other_train(openlist, trainlist, playerlist, i) == 0:
-                print("Pick up tile from pile...")
-
-                if len(pile) == 0:
-                    break
-
-                #pick up from pile
-                pile = F.pick_up_tile(playerlist, pile, i)[0]
-                    
-                print("Opening train...")
-                #open train
-                trainlist[i].set_status(True)
-                pass_tally += 1
-
-            #if player can play on another train
-            else:
-                #play on another train
-                F.play_other_train(openlist, trainlist, playerlist, i)
-                pass_tally = 0
-
-        #display player tiles and their trains last tile
-        print(playerlist[i].x, len(playerlist[i].x))
-        print(trainlist[i].x)
-
-print("!!!!!!!!!!!!!!!!!!!!!!!GAME END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-print(pile)
-    
+print("//////////////////////GAMES PLAYED: ", game_count, "////////////////////")

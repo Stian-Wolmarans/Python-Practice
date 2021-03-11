@@ -54,6 +54,8 @@ def deal_tiles(players, pile, num_players):
     #copy to player arrays
     for i in range(num_players):
         temp = pile[i]  
+        if len(temp) == 12:
+            np.delete(temp, 1, axis = 0)
         np.copyto(players[i].x, temp) 
     
     #create new pile(right side of split)
@@ -91,7 +93,11 @@ def create_trains(num_players):
     return thislist
                  
 def can_i_play(playerlist, trainlist, player_num):
-
+    
+    if len(playerlist[player_num].x) == 0:
+        z = 0
+        return z
+    
     #flatten arrays
     train = trainlist[player_num].x
     player = np.hstack(playerlist[player_num].x)
@@ -128,13 +134,18 @@ def play_own_train(playerlist, trainlist, player_num):
                         player = np.delete(player, q)
                         player = np.delete(player, q)
     
-    #unflatten array and return to 2d
-    x = (len(player)/2)
-    player = np.array_split(player, x, axis = 0)
-    player = np.vstack(player)
+    if len(player) > 0:
+            
+        #unflatten array and return to 2d
+        x = (len(player)/2)
+        player = np.array_split(player, x, axis = 0)
+        player = np.vstack(player)
 
-    #replace player array
-    playerlist[player_num].set_array(player)
+        #replace player array
+        playerlist[player_num].set_array(player)
+    else: 
+        player  = np.array([])
+        playerlist[player_num].set_array(player)
 
 def find_open_train(trainlist, num_players):
 
@@ -149,6 +160,9 @@ def find_open_train(trainlist, num_players):
 
 def play_other_train(openlist, trainlist, playerlist, player_num):
 
+    if len(playerlist[player_num].x) == 0:
+        z = 0
+        return z
     #flatten player array
     player = np.hstack(playerlist[player_num].x)
 
