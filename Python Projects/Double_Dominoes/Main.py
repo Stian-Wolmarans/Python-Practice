@@ -7,7 +7,7 @@ game_count = 0
 
 tic = time.perf_counter()
 
-for i in range(100):
+for i in range(10):
     num_players = np.random.randint(2, 8, dtype = int)
     M.Play_Game(num_players)
     game_count += 1

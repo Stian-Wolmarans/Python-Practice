@@ -45,7 +45,7 @@ def Play_Game(players):
 
                     if len(pile) == 0:
                         pass_tally += 1
-                        break
+                        return
 
                     #pick up from pile
                     pile = F.pick_up_tile(playerlist, pile, i)[0]

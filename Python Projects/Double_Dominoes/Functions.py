@@ -111,10 +111,7 @@ def play_own_train(playerlist, trainlist, player_num):
 
         #replace player array
         playerlist[player_num].set_array(player)
-    else: 
-        player  = np.array([])
-        playerlist[player_num].set_array(player)
-
+        
 def find_open_train(trainlist, num_players):
 
     temp = []
