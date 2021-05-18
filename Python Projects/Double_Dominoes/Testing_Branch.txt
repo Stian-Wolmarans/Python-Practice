@@ -1,5 +1,0 @@
-Changes:
-	- Remove tile 12_12 from pile when pile is created not during tile dealing
-	- merged buiid_pile, deal_tiles, create_players into one function called deal_tiles
-	- used slicing instead of array split, much simpler code, likely less errors
-	- optimized code by using while loops instead of for loops where possible
